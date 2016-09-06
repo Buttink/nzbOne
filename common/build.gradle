@@ -1,0 +1,122 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'realm-android'
+
+def isTravis = "true" == System.getenv("TRAVIS")
+
+def ext = rootProject.ext
+
+android {
+    compileSdkVersion ext.androidCompileSdkVersion
+    buildToolsVersion ext.androidBuildToolsVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion ext.androidMinSdkVersion
+        targetSdkVersion ext.androidTargetSdkVersion
+        versionCode ext.versionCode
+        versionName ext.versionName
+    }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled = true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    if (isTravis) {
+        lintOptions {
+            abortOnError false
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    def baseDeps = ext.baseDependencies
+    def aptDeps = ext.aptDependencies
+    def testDeps = ext.testDependencies
+
+    retrolambdaConfig aptDeps.retrolambda
+
+    provided aptDeps.autoValue
+    apt aptDeps.autoValue  // used for AndroidStudio sync
+    apt aptDeps.daggerApt
+    apt aptDeps.autoParcelApt
+
+    compile baseDeps.androidSupportAppCompatV7
+    compile baseDeps.androidSupportAnnotations
+
+    compile baseDeps.javaxAnnotation
+
+    compile baseDeps.rxJava
+    compile(baseDeps.rxAndroid) {
+        exclude module: 'rxjava'
+    }
+    compile(baseDeps.rxBinding) {
+        exclude module: 'rxjava'
+        exclude module: 'rxandroid'
+        exclude module: 'support-annotations'
+    }
+    compile(baseDeps.rxBindingAppCompatV7) {
+        exclude module: 'appcompat-v7'
+        exclude module: 'rxbinding'
+    }
+    compile(baseDeps.rxLifeCycle) {
+        exclude module: 'rxjava'
+        exclude module: 'rxbinding'
+        exclude module: 'support-annotations'
+    }
+    compile(baseDeps.rxLifeCycleComponent) {
+        exclude module: 'rxjava'
+        exclude module: 'rxlifecycle'
+        exclude module: 'appcompat-v7'
+    }
+    compile baseDeps.eventBus
+    compile baseDeps.dagger
+    compile baseDeps.butterKnife
+    compile baseDeps.sqlDelightRuntime
+
+    compile baseDeps.gson
+    compile baseDeps.okHttp
+    compile(baseDeps.retrofit) {
+        exclude module: 'okhttp'
+    }
+    compile(baseDeps.retrofitGsonConverter) {
+        exclude module: 'gson'
+    }
+    compile(baseDeps.retrofitRxJavaAdapter) {
+        exclude module: 'rxjava'
+    }
+    compile(baseDeps.sqlBrite) {
+        exclude module: 'support-annotations'
+        exclude module: 'rxjava'
+    }
+
+    compile baseDeps.threetenabp
+    compile baseDeps.autoBundle
+
+    compile baseDeps.timber
+    compile baseDeps.okHttpLogging
+    compile(baseDeps.ok2Curl) {
+        exclude module: 'okhttp'
+    }
+    compile(baseDeps.stethoOkhttp) {
+        exclude module: 'okhttp'
+    }
+
+    testCompile(testDeps.junit) {
+        exclude module: 'hamcrest-core'
+    }
+    testCompile testDeps.mockito
+}

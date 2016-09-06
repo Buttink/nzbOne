@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data class="org.nzbone.drawer.item.DrawerItemDataBinding">
+        <variable
+            name="model"
+            type="org.nzbone.drawer.item.model.DrawerItemModel"/>
+        <variable
+            name="presenter"
+            type="org.nzbone.drawer.item.DrawerItemPresenter"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        tools:ignore="UseCompoundDrawables"
+        android:onClick="@{() -> presenter.onClick()}"
+        >
+
+        <ImageView
+            android:src="@{model.icon()}"
+            android:tint="@{model.tint()}"
+            tools:src="@drawable/ic_android_black_24dp"
+            tools:tint="@color/green500"
+            style="@style/NzbOne.Drawer.ListItem.Image"
+            />
+
+        <TextView
+            style="@style/NzbOne.Drawer.ListItem.Text"
+            android:text="@{model.name()}"
+            tools:text="Sickbeard"
+            />
+
+    </LinearLayout>
+</layout>

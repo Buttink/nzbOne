@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+def isTravis = "true" == System.getenv("TRAVIS")
+
+def ext = rootProject.ext
+
+android {
+    compileSdkVersion ext.androidCompileSdkVersion
+    buildToolsVersion ext.androidBuildToolsVersion
+
+    defaultConfig {
+        applicationId "org.nzbone"
+        minSdkVersion ext.androidMinSdkVersion
+        targetSdkVersion ext.androidTargetSdkVersion
+        versionCode ext.versionCode
+        versionName ext.versionName
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled = true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    if (isTravis) {
+        lintOptions {
+            abortOnError false
+        }
+    }
+}
+
+dependencies {
+    compile project(":common")
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+
+    def baseDeps = ext.baseDependencies
+    def aptDeps = ext.aptDependencies
+    def testDeps = ext.testDependencies
+
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
+
+    retrolambdaConfig aptDeps.retrolambda
+
+    provided aptDeps.autoValue
+    apt aptDeps.autoValue  // used for AndroidStudio sync
+    apt aptDeps.daggerApt
+    apt aptDeps.autoParcelApt
+
+    compile baseDeps.androidSupportAppCompatV7
+    compile baseDeps.androidSupportAnnotations
+    compile baseDeps.androidSupportRecyclerView
+
+    compile baseDeps.javaxAnnotation
+
+    compile baseDeps.rxJava
+    compile(baseDeps.rxAndroid) {
+        exclude module: 'rxjava'
+    }
+    compile(baseDeps.rxBinding) {
+        exclude module: 'rxjava'
+        exclude module: 'rxandroid'
+        exclude module: 'support-annotations'
+    }
+    compile(baseDeps.rxBindingAppCompatV7) {
+        exclude module: 'appcompat-v7'
+        exclude module: 'rxbinding'
+    }
+    compile(baseDeps.rxLifeCycle) {
+        exclude module: 'rxjava'
+        exclude module: 'rxbinding'
+        exclude module: 'support-annotations'
+    }
+    compile(baseDeps.rxLifeCycleComponent) {
+        exclude module: 'rxjava'
+        exclude module: 'rxlifecycle'
+        exclude module: 'appcompat-v7'
+    }
+    compile baseDeps.eventBus
+    compile baseDeps.dagger
+    compile baseDeps.butterKnife
+    compile baseDeps.timber
+}
