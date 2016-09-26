@@ -26,16 +26,16 @@ public class DrawerFragment extends BaseFragment implements DrawerView {
     @BindView(R.id.list) RecyclerView recyclerView;
 
     @Inject DrawerPresenterFactory presenterFactory;
+    @Inject DrawerAdapter adapter;
 
     private Unbinder viewBinding = Unbinder.EMPTY;
-    private DrawerAdapter adapter;
     private DrawerPresenter presenter;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        getApplication().getComponent().inject(this);
-        presenter = presenterFactory.build(this);
+        getComponent().inject(this);
+        presenter = presenterFactory.create(this);
     }
 
     @Nullable
@@ -50,7 +50,6 @@ public class DrawerFragment extends BaseFragment implements DrawerView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new DrawerAdapter();
         recyclerView.setAdapter(adapter);
     }
 

@@ -53,9 +53,12 @@ dependencies {
     retrolambdaConfig aptDeps.retrolambda
 
     provided aptDeps.autoValue
-    apt aptDeps.autoValue  // used for AndroidStudio sync
+    provided aptDeps.autoFactory
+    apt aptDeps.autoValue
+    apt aptDeps.autoFactory
     apt aptDeps.daggerApt
     apt aptDeps.autoParcelApt
+    apt aptDeps.butterKnifeApt
 
     compile baseDeps.androidSupportAppCompatV7
     compile baseDeps.androidSupportAnnotations

@@ -2,6 +2,7 @@ package org.nzbone.drawer;
 
 import android.support.annotation.NonNull;
 
+import javax.inject.Provider;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -19,7 +20,7 @@ public class DrawerModule {
 
     @Provides
     @Singleton
-    DrawerPresenterFactory provideDrawerPresenterFactory(DrawerService service) {
+    DrawerPresenterFactory provideDrawerPresenterFactory(Provider<DrawerService> service) {
         return new DrawerPresenterFactory(service);
     }
 }

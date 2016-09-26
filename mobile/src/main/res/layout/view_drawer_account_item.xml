@@ -2,6 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <data class="org.nzbone.drawer.item.DrawerItemDataBinding">
         <variable
@@ -21,8 +22,8 @@
         >
 
         <ImageView
-            android:src="@{model.icon()}"
-            android:tint="@{model.tint()}"
+            app:srcBinding="@{model.icon()}"
+            app:tintBinding="@{model.tint()}"
             tools:src="@drawable/ic_android_black_24dp"
             tools:tint="@color/green500"
             style="@style/NzbOne.Drawer.ListItem.Image"

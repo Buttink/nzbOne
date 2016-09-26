@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="start"
+    android:orientation="vertical"
     >
 
-    <LinearLayout
+    <include layout="@layout/view_toolbar" />
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/container"
-        android:orientation="horizontal"
-        />
+        android:layout_gravity="start"
+        >
 
-    <fragment
-        android:id="@+id/fragment_drawer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="org.nzbone.drawer.DrawerFragment"
-        tools:layout="@layout/fragment_drawer"
-        />
+        <fragment
+            android:id="@+id/fragment_drawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="org.nzbone.drawer.DrawerFragment"
+            tools:layout="@layout/fragment_drawer"
+            android:layout_gravity="start"
+            />
 
-</android.support.v4.widget.DrawerLayout>
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            />
+
+    </android.support.v4.widget.DrawerLayout>
+
+</LinearLayout>

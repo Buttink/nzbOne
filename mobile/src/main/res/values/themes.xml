@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="Theme.NzbOne" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/green500</item>
+        <item name="colorPrimaryDark">@color/green700</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Theme.NzbOne.SickBeard" parent="Theme.NzbOne">
+        <item name="colorPrimary">@color/green500</item>
+        <item name="colorPrimaryDark">@color/green700</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ThemeOverlay.NzbOne.Dark.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+</resources>

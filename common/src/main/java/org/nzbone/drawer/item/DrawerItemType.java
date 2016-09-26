@@ -2,6 +2,6 @@ package org.nzbone.drawer.item;
 
 public enum DrawerItemType {
     ACCOUNT,
-    SEPERATOR,
+    SEPARATOR,
     ADD_ACCOUNT,
 }

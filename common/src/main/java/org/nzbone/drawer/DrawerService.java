@@ -39,7 +39,7 @@ public class DrawerService {
                     }
                     model.add(DrawerItemModel.create(
                                 -1,
-                                DrawerItemType.SEPERATOR,
+                                DrawerItemType.SEPARATOR,
                                 "",
                                 0,
                                 0));

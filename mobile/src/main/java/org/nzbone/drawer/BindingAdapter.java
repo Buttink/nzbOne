@@ -10,25 +10,32 @@ import org.nzbone.util.ModelDiffCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BindingAdapter<S, T extends ListModel> extends RecyclerView.Adapter<BindingViewHolder<S>> {
+public abstract class BindingAdapter<T extends ListModel> extends RecyclerView.Adapter<BindingViewHolder<T>> {
 
     @NonNull private List<T> model = new ArrayList<>();
 
-    public void update(final List<T> model) {
+    public final void update(final List<T> model) {
         DiffUtil.DiffResult result = DiffUtil.calculateDiff(new ModelDiffCallback(this.model, model));
         this.model = model;
         result.dispatchUpdatesTo(this);
     }
 
     @Override
-    public void onBindViewHolder(BindingViewHolder<S> holder, int position) {
+    public final void onBindViewHolder(BindingViewHolder<T> holder, int position) {
         onBindViewHolder(holder, model.get(position));
     }
 
-    protected abstract void onBindViewHolder(BindingViewHolder<S> holder, T item);
+    protected abstract void onBindViewHolder(BindingViewHolder<T> holder, T model);
 
     @Override
-    public int getItemCount() {
+    public final int getItemViewType(int position) {
+        return getItemViewType(model.get(position));
+    }
+
+    protected abstract int getItemViewType(T t);
+
+    @Override
+    public final int getItemCount() {
         return model.size();
     }
 }

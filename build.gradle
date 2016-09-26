@@ -7,7 +7,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0-rc1'
+        classpath 'com.android.tools.build:gradle:2.2.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
         classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.4'
@@ -34,7 +34,7 @@ task clean(type: Delete) {
 
 ext {
     // Android
-    androidBuildToolsVersion = '24.0.1'
+    androidBuildToolsVersion = '24.0.2'
     androidMinSdkVersion = 15
     androidTargetSdkVersion = 24
     androidCompileSdkVersion = 24
@@ -143,6 +143,7 @@ ext {
             butterKnifeApt     : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
 
             autoValue          : "com.google.auto.value:auto-value:1.3-rc2",
+            autoFactory        : "com.google.auto.factory:auto-factory:1.0-beta3",
             autoParcelApt      : "com.ryanharter.auto.value:auto-value-parcel:0.2.3-rc2",
             autoGsonApt        : "com.ryanharter.auto.value:auto-value-gson:0.4.0",
             autoBundleApt      : "com.github.yatatsu:autobundle-processor:${autoBundleVersion}",
