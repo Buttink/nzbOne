@@ -34,7 +34,9 @@ public class DrawerFragment extends BaseFragment implements DrawerContract.View 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        getComponent().inject(this);
+        getComponent()
+            .providesDrawerComponent(new DrawerModule())
+            .inject(this);
         presenter = presenterFactory.create(this);
     }
 

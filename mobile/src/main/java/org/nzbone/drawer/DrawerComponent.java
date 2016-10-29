@@ -1,10 +1,13 @@
 package org.nzbone.drawer;
 
-import dagger.Component;
-import org.nzbone.ApplicationComponent;
+import javax.inject.Singleton;
 
-@Component(dependencies = ApplicationComponent.class, modules = {
+import dagger.Subcomponent;
+
+@Singleton
+@Subcomponent(modules = {
         DrawerModule.class,
 })
-public class DrawerComponent {
+public interface DrawerComponent {
+    void inject(DrawerFragment fragment);
 }

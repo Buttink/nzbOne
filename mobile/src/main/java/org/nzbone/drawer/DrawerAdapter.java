@@ -9,11 +9,14 @@ import org.nzbone.drawer.item.DrawerItemType;
 import org.nzbone.drawer.item.DrawerSeparatorItemDataBinding;
 import org.nzbone.drawer.item.model.DrawerItemModel;
 
+import javax.inject.Inject;
+
 public class DrawerAdapter extends BindingAdapter<DrawerItemModel> {
 
     @NonNull private final DrawerItemBinderViewHolderFactory itemFactory;
     @NonNull private final DrawerSeparatorBinderViewHolderFactory separatorFactory;
 
+    @Inject
     protected DrawerAdapter(@NonNull DrawerItemBinderViewHolderFactory itemFactory,
                             @NonNull DrawerSeparatorBinderViewHolderFactory separatorFactory) {
         super();

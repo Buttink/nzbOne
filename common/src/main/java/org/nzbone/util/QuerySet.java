@@ -1,4 +1,4 @@
-package org.nzbone.common.util;
+package org.nzbone.util;
 
 import rx.Observable;
 

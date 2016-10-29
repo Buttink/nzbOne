@@ -20,7 +20,7 @@
 package org.sickbeard;
 
 import okhttp3.ResponseBody;
-import org.nzbone.common.util.QuerySet;
+import org.nzbone.util.QuerySet;
 import org.sickbeard.Episode.Status;
 import org.sickbeard.Show.Quality;
 import org.sickbeard.model.*;
