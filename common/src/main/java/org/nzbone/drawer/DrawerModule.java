@@ -6,8 +6,6 @@ import javax.inject.Provider;
 import javax.inject.Singleton;
 
 import dagger.Module;
-import dagger.Provides;
-import io.realm.Realm;
 
 @Module
 public class DrawerModule {

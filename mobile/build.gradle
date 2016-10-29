@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'realm-android'
 
 def isTravis = "true" == System.getenv("TRAVIS")
 
@@ -9,6 +10,11 @@ def ext = rootProject.ext
 android {
     compileSdkVersion ext.androidCompileSdkVersion
     buildToolsVersion ext.androidBuildToolsVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "org.nzbone"
@@ -46,25 +52,23 @@ dependencies {
 
     def baseDeps = ext.baseDependencies
     def aptDeps = ext.aptDependencies
+    def appDeps = ext.appDependencies
     def testDeps = ext.testDependencies
 
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
 
-    retrolambdaConfig aptDeps.retrolambda
-
-    provided aptDeps.autoValue
     provided aptDeps.autoFactory
-    apt aptDeps.autoValue
+    provided aptDeps.autoParcel
+    provided aptDeps.autoValue
     apt aptDeps.autoFactory
-    apt aptDeps.daggerApt
-    apt aptDeps.autoParcelApt
-    apt aptDeps.butterKnifeApt
+    apt aptDeps.autoParcel
+    apt aptDeps.autoValue
+    apt aptDeps.dagger
 
-    compile baseDeps.androidSupportAppCompatV7
+    compile baseDeps.threetenabp
+    compile appDeps.androidSupportAppCompatV7
     compile baseDeps.androidSupportAnnotations
-    compile baseDeps.androidSupportRecyclerView
-
-    compile baseDeps.javaxAnnotation
+    compile appDeps.androidSupportRecyclerView
 
     compile baseDeps.rxJava
     compile(baseDeps.rxAndroid) {
@@ -91,6 +95,6 @@ dependencies {
     }
     compile baseDeps.eventBus
     compile baseDeps.dagger
-    compile baseDeps.butterKnife
+    compile appDeps.butterKnife
     compile baseDeps.timber
 }

@@ -2,6 +2,7 @@ package org.nzbone;
 
 import android.app.Application;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
 import org.nzbone.drawer.DrawerModule;
 
 public class NzbOneApplication extends Application {
@@ -11,9 +12,9 @@ public class NzbOneApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        AndroidThreeTen.init(this);
         component = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
-                .drawerModule(new DrawerModule())
                 .build();
     }
 

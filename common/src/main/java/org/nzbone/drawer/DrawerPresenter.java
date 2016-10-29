@@ -9,14 +9,17 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.Subscriptions;
 
-@AutoFactory
-public class DrawerPresenter {
+import javax.inject.Inject;
 
-    @NonNull private final DrawerView view;
+@AutoFactory
+public class DrawerPresenter implements DrawerContract.Presenter {
+
+    @NonNull private final DrawerContract.View view;
     @NonNull private final DrawerService drawerService;
     @NonNull private Subscription itemsSubscriptions = Subscriptions.empty();
 
-    public DrawerPresenter(@NonNull DrawerView view,
+    @Inject
+    public DrawerPresenter(@NonNull DrawerContract.View view,
                            @Provided @NonNull DrawerService drawerService) {
         this.view = view;
         this.drawerService = drawerService;

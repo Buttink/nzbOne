@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class DrawerFragment extends BaseFragment implements DrawerView {
+public class DrawerFragment extends BaseFragment implements DrawerContract.View {
 
     @BindView(R.id.list) RecyclerView recyclerView;
 
