@@ -19,7 +19,6 @@
  */
 package org.sickbeard;
 
-import android.util.Log;
 import org.sickbeard.model.TvDbResultJson;
 
 import java.text.SimpleDateFormat;
@@ -35,17 +34,16 @@ public class SearchResultTvDb implements SearchResult {
 	private final String provider = "TheTVDB";
 	
 	public SearchResultTvDb() {
-		;
 	}
 	
-	public SearchResultTvDb( TvDbResultJson json ) {
+	public SearchResultTvDb(TvDbResultJson json) {
 		this();
 		try {
 			if ( json.first_aired != null )
 				this.year = yearFormat.format(tvdbdate.parse(json.first_aired));
 		} catch (Exception e) {
-			if ( json.first_aired != null )
-				Log.i("SearchResultTvDb", "Error parsing string " + json.first_aired.toString());
+//			if ( json.first_aired != null )
+//				log.i("SearchResultTvDb", "Error parsing string " + json.first_aired.toString());
 		}
 		this.title = json.name;
 		this.id = String.valueOf(json.tvdbid);

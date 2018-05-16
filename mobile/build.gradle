@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'realm-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 def isTravis = "true" == System.getenv("TRAVIS")
 
@@ -46,55 +46,32 @@ android {
 }
 
 dependencies {
-    compile project(":common")
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+    implementation project(":common")
 
     def baseDeps = ext.baseDependencies
     def aptDeps = ext.aptDependencies
     def appDeps = ext.appDependencies
     def testDeps = ext.testDependencies
 
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
 
-    provided aptDeps.autoFactory
-    provided aptDeps.autoParcel
-    provided aptDeps.autoValue
-    apt aptDeps.autoFactory
-    apt aptDeps.autoParcel
-    apt aptDeps.autoValue
-    apt aptDeps.dagger
+    kapt aptDeps.autoFactory
+    kapt aptDeps.dagger
 
-    compile baseDeps.threetenabp
-    compile appDeps.androidSupportAppCompatV7
-    compile baseDeps.androidSupportAnnotations
-    compile appDeps.androidSupportRecyclerView
+    implementation (appDeps.threetenabp) {
+        exclude group: 'org.threeten', module: 'threetenbp'
+    }
+    implementation appDeps.androidSupportAppCompatV7
+    implementation baseDeps.androidSupportAnnotations
+    implementation appDeps.androidSupportRecyclerView
 
-    compile baseDeps.rxJava
-    compile(baseDeps.rxAndroid) {
-        exclude module: 'rxjava'
-    }
-    compile(baseDeps.rxBinding) {
-        exclude module: 'rxjava'
-        exclude module: 'rxandroid'
-        exclude module: 'support-annotations'
-    }
-    compile(baseDeps.rxBindingAppCompatV7) {
-        exclude module: 'appcompat-v7'
-        exclude module: 'rxbinding'
-    }
-    compile(baseDeps.rxLifeCycle) {
-        exclude module: 'rxjava'
-        exclude module: 'rxbinding'
-        exclude module: 'support-annotations'
-    }
-    compile(baseDeps.rxLifeCycleComponent) {
-        exclude module: 'rxjava'
-        exclude module: 'rxlifecycle'
-        exclude module: 'appcompat-v7'
-    }
-    compile baseDeps.eventBus
-    compile baseDeps.dagger
-    compile appDeps.butterKnife
-    compile baseDeps.timber
+    implementation baseDeps.rxJava
+    implementation(appDeps.rxAndroid)
+    implementation(appDeps.rxBinding)
+    implementation(appDeps.rxBindingAppCompatV7)
+    implementation(appDeps.rxLifeCycle)
+    implementation(appDeps.rxLifeCycleComponent)
+    implementation baseDeps.dagger
+
+    testImplementation 'junit:junit:4.12'
 }

@@ -19,6 +19,7 @@
  */
 package org.sickbeard;
 
+import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import org.nzbone.util.QuerySet;
 import org.sickbeard.Episode.Status;
@@ -28,7 +29,6 @@ import org.sickbeard.model.ShowJson.CacheStatusJson;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
-import rx.Observable;
 
 import java.util.ArrayList;
 import java.util.HashMap;

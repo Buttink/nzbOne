@@ -19,8 +19,6 @@
  */
 package org.sickbeard;
 
-import android.os.AsyncTask;
-import android.util.Log;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.sickbeard.Episode.Status;
@@ -32,8 +30,6 @@ import org.sickbeard.model.deserializer.JsonBooleanDeserializer;
 import org.sickbeard.model.type.JsonBoolean;
 import org.sickbeard.net.SickAuthenticator;
 import org.sickbeard.net.ssl.DefaultTrustManager;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 import javax.net.ssl.*;
 import java.io.BufferedReader;
@@ -102,32 +98,32 @@ public class SickBeard {
 		 * ANDROID SPECIFIC START                                  *
 		 ***********************************************************/
 		// start a AsyncTask to try and find the actual api version number
-		AsyncTask<Void,Void,CommandsJson> task = new AsyncTask<Void,Void,CommandsJson>(){
-			@Override
-			protected CommandsJson doInBackground(Void... arg0) {
-				try {
-					return SickBeard.this.sbGetCommands();
-				} catch (Exception e) {
-					Log.e("SickBeard", e.getMessage(), e);
-					return null;
-				}
-			}
-			
-			@Override
-			protected void onPostExecute(CommandsJson result) {
-				// do nothing because this is a network error
-				if ( result == null )
-					return;
-				try {
-					// if we get a version use it
-					SickBeard.this.apiVersion = Integer.valueOf(result.api_version);
-				} catch (NumberFormatException e) {
-					// 2 was the odd float so assume its 2 if we cant get an int
-					SickBeard.this.apiVersion = 2;
-				}
-		     }
-		};
-		task.execute();
+//		AsyncTask<Void,Void,CommandsJson> task = new AsyncTask<Void,Void,CommandsJson>(){
+//			@Override
+//			protected CommandsJson doInBackground(Void... arg0) {
+//				try {
+//					return SickBeard.this.sbGetCommands();
+//				} catch (Exception e) {
+//					Log.e("SickBeard", e.getMessage(), e);
+//					return null;
+//				}
+//			}
+//
+//			@Override
+//			protected void onPostExecute(CommandsJson result) {
+//				// do nothing because this is a network error
+//				if ( result == null )
+//					return;
+//				try {
+//					// if we get a version use it
+//					SickBeard.this.apiVersion = Integer.valueOf(result.api_version);
+//				} catch (NumberFormatException e) {
+//					// 2 was the odd float so assume its 2 if we cant get an int
+//					SickBeard.this.apiVersion = 2;
+//				}
+//		     }
+//		};
+//		task.execute();
 		/***********************************************************
 		 * ANDROID SPECIFIC END                                    *
 		 ***********************************************************/
